@@ -1,0 +1,19 @@
+package com.sapient.acebatch2.services;
+
+import com.sapient.acebatch2.models.Course;
+
+public class CourseServiceImpl implements ICourseService {
+
+	@Override
+	public void addCourse(Course course) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Course getCourse(Long courseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

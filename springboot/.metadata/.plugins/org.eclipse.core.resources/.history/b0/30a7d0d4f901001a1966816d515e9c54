@@ -1,0 +1,14 @@
+package com.sapient.acebatch2.services;
+
+import java.util.List;
+
+import com.sapient.acebatch2.models.Course;
+
+public interface ICourseService {
+	
+	void addCourse(Course course);
+	Course getCourse(Long courseId);
+	List<Course> getAllCourses();
+	void updateCourse(Course course);
+
+}

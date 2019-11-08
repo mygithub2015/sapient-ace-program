@@ -1,0 +1,49 @@
+package com.sapient.acebatch2.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sapient.acebatch2.models.Course;
+import com.sapient.acebatch2.repositories.CourseRepository;
+
+@Service
+public class CourseServiceImpl implements ICourseService {
+
+	@Autowired
+	private CourseRepository courseRepository;
+	
+	@Override
+	public Course addCourse(Course course) {
+
+		return this.courseRepository.save(course);
+	}
+
+	@Override
+	public Course getCourse(Long courseId) {
+		Optional<Course> optionalCourse= this.courseRepository.findById(courseId);
+		if(optionalCourse.isPresent())
+			return optionalCourse.get();
+		return null;
+	}
+
+	@Override
+	public List<Course> getAllCourses() {
+		return this.courseRepository.findAll();
+	}
+
+	@Override
+	public Course updateCourse(Course course) {
+		return this.courseRepository.save(course);
+	}
+
+	@Override
+	public void deleteCourse(Long courseId) {
+
+		this.courseRepository.deleteById(courseId);
+
+	}
+
+}

@@ -1,0 +1,11 @@
+package com.sapient.acebatch2.services;
+
+import com.sapient.acebatch2.models.Course;
+
+public interface ICourseService {
+	
+	void addCourse(Course course);
+	Course getCourse(Long courseId);
+	List<Course> getAllCourses();
+
+}

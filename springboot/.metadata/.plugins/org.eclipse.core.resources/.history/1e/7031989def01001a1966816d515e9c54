@@ -1,0 +1,5 @@
+package com.sapient.acebatch2.services;
+
+public interface ICourseService {
+
+}

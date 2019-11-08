@@ -1,0 +1,9 @@
+package com.sapient.acebatch2.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.sapient.acebatch2.models.Course;
+
+public class CourseRepository implements JpaRepository<Course, Long> {
+
+}

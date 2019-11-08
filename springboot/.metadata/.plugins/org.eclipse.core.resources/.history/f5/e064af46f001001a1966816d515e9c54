@@ -1,0 +1,33 @@
+package com.sapient.acebatch2.controllers;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sapient.acebatch2.models.Course;
+
+@RestController
+@RequestMapping("course-api")
+public class CourseController {
+	
+	private List<Course> courses  = new ArrayList<>();
+	
+	@GetMapping("/hello")
+	private String sayHello() {
+		return "Welcome to Course-API!";
+	}
+	
+	@PutMapping("/add")
+	private String addCourse(@RequestBody Course course) {
+		
+		courses.add(course);
+		return "course is added successfully!";
+		
+	}
+
+}

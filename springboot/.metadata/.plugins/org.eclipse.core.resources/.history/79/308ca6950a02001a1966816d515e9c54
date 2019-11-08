@@ -1,0 +1,16 @@
+logging.level.org.springframework.*=info
+spring.devtools.restart.enabled=true
+
+#H2 database specific properties
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+# Enabling H2 Console
+spring.h2.console.enabled=true
+
+#Jpa
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
