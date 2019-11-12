@@ -1,0 +1,3 @@
+server.port=9090
+zuul.routes.department-catalogue-api.path=/department-catalogue-api/""
+zuul.routes.department-catalogue-api.url=http://localhost:8080

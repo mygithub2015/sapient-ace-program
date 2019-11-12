@@ -1,0 +1,12 @@
+server.port=9090
+#zuul.routes.department-catalogue-api.path=/department-catalogue-api/""
+zuul.routes.department-catalogue-api.url=http://localhost:8080
+
+#zuul.routes.department-count-api.path=/department-count-api/""
+zuul.routes.department-count-api.url=http://localhost:8081
+
+#zuul.routes.department-description-api.path=/department-description-api/""
+zuul.routes.department-description-api.url=http://localhost:8082
+
+logging.level.org.springframework.*=info
+spring.devtools.restart.enabled=true

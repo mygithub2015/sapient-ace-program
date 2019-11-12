@@ -31,8 +31,21 @@ public class DepartmentCatalogueController {
 	@GetMapping("info/{id}")
 	private Department getDeptInformations(@PathVariable Long id) {
 		
-		DepartmentCount deptCount = this.restTemplate.getForObject("http://localhost:8081/department-count-api/"+id, DepartmentCount.class );
-		DepartmentDescription deptDesc = this.restTemplate.getForObject("http://localhost:8082/department-description-api/"+id, DepartmentDescription.class);
+		
+		  DepartmentCount deptCount =
+		  this.restTemplate.getForObject("http://localhost:8081/department-count-api/"+
+		  id, DepartmentCount.class ); DepartmentDescription deptDesc =
+		  this.restTemplate.getForObject(
+		  "http://localhost:8082/department-description-api/"+id,
+		  DepartmentDescription.class);
+		 
+		/*
+		 * DepartmentCount deptCount = this.restTemplate.getForObject(
+		 * "http://department-count-api/department-count-api/"+id, DepartmentCount.class
+		 * ); DepartmentDescription deptDesc = this.restTemplate.getForObject(
+		 * "http://department-description-api/department-description-api/"+id,
+		 * DepartmentDescription.class);
+		 */
 		Optional<DepartmentCatalogue> optionalDeptCatalogue = this.deptCatalogueList.stream().filter(e->e.getId().equals(id)).findFirst();
 		DepartmentCatalogue deptCatalogue = new DepartmentCatalogue();
 		if(optionalDeptCatalogue.isPresent())deptCatalogue = optionalDeptCatalogue.get();
