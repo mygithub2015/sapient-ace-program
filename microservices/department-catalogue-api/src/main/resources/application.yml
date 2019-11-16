@@ -1,0 +1,19 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+logging:
+  level:
+    org:
+      springframework:
+        '*': info
+server:
+  port: 8080
+spring:
+  application:
+    name: department-catalogue-api
+  devtools:
+    restart:
+      enabled: true
