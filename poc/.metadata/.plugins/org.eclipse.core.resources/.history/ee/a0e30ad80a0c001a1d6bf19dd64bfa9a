@@ -12,7 +12,7 @@ spring:
       host: localhost
       password: root
       port: 27017
-      username: root
+      username: root1
 #logging:
 #  level:
 #    org.springframework.data.mongodb.core.query: DEBUG      

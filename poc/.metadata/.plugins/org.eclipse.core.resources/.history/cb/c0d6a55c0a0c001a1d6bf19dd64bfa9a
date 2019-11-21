@@ -7,7 +7,7 @@ spring:
     name: BootMongo
   data:
     mongodb:
-      authentication-database: admin
+#      authentication-database: admin
       database: booking_db
       host: localhost
       password: root

@@ -7,12 +7,12 @@ spring:
     name: BootMongo
   data:
     mongodb:
-      authentication-database: admin
+#      authentication-database: admin
       database: booking_db
       host: localhost
-      password: root
+#      password: root
       port: 27017
-      username: root
+#      username: root
 #logging:
 #  level:
 #    org.springframework.data.mongodb.core.query: DEBUG      
