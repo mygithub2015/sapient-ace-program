@@ -1,0 +1,5 @@
+package com.sapient.booking.repository;
+
+public class BookingDetailsRepository {
+
+}

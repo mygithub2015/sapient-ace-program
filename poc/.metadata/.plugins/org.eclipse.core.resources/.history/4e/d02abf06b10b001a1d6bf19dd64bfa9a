@@ -1,0 +1,15 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /sapient
+spring:
+  application:
+    name: BootMongo
+  data:
+    mongodb:
+      authentication-database: admin
+      database: booking_db
+      host: localhost
+      password: root
+      port: 27017
+      username: root
