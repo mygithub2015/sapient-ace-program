@@ -4,7 +4,7 @@ server:
     context-path: /sapient
 spring:
   application:
-    name: BootMongo
+    name: booking-service
   data:
     mongodb:
       authentication-database: admin
