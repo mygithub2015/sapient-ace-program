@@ -1,0 +1,22 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
+spring:  application:    name: ZUUL-API-GATEWAY
+server:  port: 9090
+zuul:
+   routes:
+    department-catalogue:
+        path: /department-catalogue/**
+        serviceId: department-catalogue
+        stripPrefix: true
+    department-count:
+        path: /department-count/**
+        serviceId: department-count
+        stripPrefix: true
+    department-description:
+        path: /department-description/**
+        serviceId: department-description
+        stripPrefix: true

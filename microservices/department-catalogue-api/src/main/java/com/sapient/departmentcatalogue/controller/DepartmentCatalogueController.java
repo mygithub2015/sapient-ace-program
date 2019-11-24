@@ -9,27 +9,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.netflix.discovery.EurekaClient;
 import com.sapient.departmentcatalogue.models.Department;
 import com.sapient.departmentcatalogue.models.DepartmentCatalogue;
 import com.sapient.departmentcatalogue.models.DepartmentCount;
 import com.sapient.departmentcatalogue.models.DepartmentDescription;
+import com.sapient.departmentcatalogue.service.DepartmentCountServiceClient;
+import com.sapient.departmentcatalogue.service.DepartmentDescriptionServiceClient;
 
 @RestController
 @RequestMapping("department-catalogue-api/")
 public class DepartmentCatalogueController {
-	@Autowired
-    private EurekaClient discoveryClient;
-	
 	private List<DepartmentCatalogue> deptCatalogueList = Arrays.asList(
 															new DepartmentCatalogue(1L, "Java"),
 															new DepartmentCatalogue(2L, "JavaScript"),
 															new DepartmentCatalogue(3L, "Python"));
 	
+	/*
+	 * @Autowired private RestTemplate restTemplate;
+	 */
 	@Autowired
-	private RestTemplate restTemplate;
+	private DepartmentCountServiceClient deptCountServiceClient;
+	@Autowired
+	private DepartmentDescriptionServiceClient deptDescServiceClient;
 	
 	@GetMapping("info/{id}")
 	private Department getDeptInformations(@PathVariable Long id) {
@@ -44,17 +47,26 @@ public class DepartmentCatalogueController {
 		 * DepartmentDescription.class);
 		 */
 		 
-        String departmentCountApiUrl = discoveryClient.getNextServerFromEureka("department-count-api", false).getHomePageUrl();
-        String departmentDescApiUrl = discoveryClient.getNextServerFromEureka("department-description-api", false).getHomePageUrl();
-        System.err.println("departmentCountApiUrl: "+departmentCountApiUrl);
-        System.err.println("departmentDescApiUrl: "+departmentDescApiUrl);
-        
-        DepartmentCount deptCount = this.restTemplate.getForObject(
-				  departmentCountApiUrl+"/department-count-api/"+id, DepartmentCount.class
-		  ); DepartmentDescription deptDesc = this.restTemplate.getForObject(
-				  departmentDescApiUrl+"/department-description-api/"+id,
-		  DepartmentDescription.class);
-		 
+		/*
+		 * String departmentCountApiUrl =
+		 * discoveryClient.getNextServerFromEureka("department-count",
+		 * false).getHomePageUrl(); String departmentDescApiUrl =
+		 * discoveryClient.getNextServerFromEureka("department-description",
+		 * false).getHomePageUrl();
+		 * System.err.println("departmentCountApiUrl: "+departmentCountApiUrl);
+		 * System.err.println("departmentDescApiUrl: "+departmentDescApiUrl);
+		 * 
+		 * DepartmentCount deptCount = this.restTemplate.getForObject(
+		 * departmentCountApiUrl+"/department-count-api/"+id, DepartmentCount.class );
+		 * DepartmentDescription deptDesc = this.restTemplate.getForObject(
+		 * departmentDescApiUrl+"/department-description-api/"+id,
+		 * DepartmentDescription.class);
+		 */
+		
+		
+		DepartmentCount deptCount = this.deptCountServiceClient.getDepartmentCount(id);
+		DepartmentDescription deptDesc = this.deptDescServiceClient.getDepartmentDescription(id);
+		
 		Optional<DepartmentCatalogue> optionalDeptCatalogue = this.deptCatalogueList.stream().filter(e->e.getId().equals(id)).findFirst();
 		DepartmentCatalogue deptCatalogue = new DepartmentCatalogue();
 		if(optionalDeptCatalogue.isPresent())deptCatalogue = optionalDeptCatalogue.get();
