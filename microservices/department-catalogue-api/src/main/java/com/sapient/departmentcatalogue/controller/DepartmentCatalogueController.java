@@ -9,14 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
-import com.netflix.discovery.EurekaClient;
 import com.sapient.departmentcatalogue.models.Department;
 import com.sapient.departmentcatalogue.models.DepartmentCatalogue;
 import com.sapient.departmentcatalogue.models.DepartmentCount;
 import com.sapient.departmentcatalogue.models.DepartmentDescription;
-import com.sapient.departmentcatalogue.service.DepartmentCountServiceClient;
-import com.sapient.departmentcatalogue.service.DepartmentDescriptionServiceClient;
 
 @RestController
 @RequestMapping("department-catalogue-api/")
@@ -29,23 +27,26 @@ public class DepartmentCatalogueController {
 	/*
 	 * @Autowired private RestTemplate restTemplate;
 	 */
-	@Autowired
-	private DepartmentCountServiceClient deptCountServiceClient;
-	@Autowired
-	private DepartmentDescriptionServiceClient deptDescServiceClient;
+	/*
+	 * @Autowired private DepartmentCountServiceClient deptCountServiceClient;
+	 * 
+	 * @Autowired private DepartmentDescriptionServiceClient deptDescServiceClient;
+	 */
 	
+	@Autowired
+	private RestTemplate restTemplate;
 	@GetMapping("info/{id}")
 	private Department getDeptInformations(@PathVariable Long id) {
 		
 		
-		/*
-		 * DepartmentCount deptCount =
-		 * this.restTemplate.getForObject("http://localhost:8081/department-count-api/"+
-		 * id, DepartmentCount.class ); DepartmentDescription deptDesc =
-		 * this.restTemplate.getForObject(
-		 * "http://localhost:8082/department-description-api/"+id,
-		 * DepartmentDescription.class);
-		 */
+		
+		  DepartmentCount deptCount =
+		  this.restTemplate.getForObject("http://department-count/department-count-api/"+
+		  id, DepartmentCount.class ); DepartmentDescription deptDesc =
+		  this.restTemplate.getForObject(
+		  "http://department-description/department-description-api/"+id,
+		  DepartmentDescription.class);
+		 
 		 
 		/*
 		 * String departmentCountApiUrl =
@@ -64,8 +65,11 @@ public class DepartmentCatalogueController {
 		 */
 		
 		
-		DepartmentCount deptCount = this.deptCountServiceClient.getDepartmentCount(id);
-		DepartmentDescription deptDesc = this.deptDescServiceClient.getDepartmentDescription(id);
+		/*
+		 * DepartmentCount deptCount =
+		 * this.deptCountServiceClient.getDepartmentCount(id); DepartmentDescription
+		 * deptDesc = this.deptDescServiceClient.getDepartmentDescription(id);
+		 */
 		
 		Optional<DepartmentCatalogue> optionalDeptCatalogue = this.deptCatalogueList.stream().filter(e->e.getId().equals(id)).findFirst();
 		DepartmentCatalogue deptCatalogue = new DepartmentCatalogue();
