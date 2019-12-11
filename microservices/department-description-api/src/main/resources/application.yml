@@ -4,13 +4,15 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     preferIpAddress: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
 logging:
   level:
     org:
       springframework:
         '*': info
 server:
-  port: 8082
+  port: 0
 spring:
   application:
     name: department-description
