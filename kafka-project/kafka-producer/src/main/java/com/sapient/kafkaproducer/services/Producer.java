@@ -12,7 +12,7 @@ import com.sapient.kafkaproducer.models.Message;
 @Service
 public class Producer {
 	private static final Logger logger = LoggerFactory.getLogger(Producer.class);
-	private static final String TOPIC = "department_topic";
+	private static final String TOPIC = "department-topic";
 	
 	/*
 	 * @Autowired private KafkaTemplate<String, String> kafkaTemplate;
